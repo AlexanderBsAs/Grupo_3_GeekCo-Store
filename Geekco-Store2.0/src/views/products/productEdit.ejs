@@ -1,0 +1,36 @@
+<%- include("../partials/head.ejs") %>
+
+    <body class="home__body">
+        <%- include("../partials/header.ejs") %>
+            <main>
+                <form method="post" acti>
+                    <div>
+                        <label for="nombre" id="nombre"> Ingrese el nombre del producto</label>
+                        <input type="text" name="nombre">
+                    </div>
+                    <div>
+                        <label for="descripcion">Agregue una breve descripcion</label>
+                        <input type="text" name="descripcion" id="descripcion">
+                    </div>
+                    <div>
+                        <label for="imagen">selecciona una imagen para el producto</label>
+                        <input type="file" name="imagen" id="imagen">
+                    </div>
+                    <div>
+                        <label for="categoria">selecione</label>
+                        <select name="categoria" id="categoria">
+                            <option value="img-nuevo.png">novedad</option>
+                            <option value="img-descuento.png">descuento</option>
+                            <option value="img-gratis.png">gratuito</option>
+                        </select>
+                    </div>
+                    <div>
+                        <button type="reset">Borrar</button>
+                        <button type="submit">Crear</button>
+                    </div>
+                </form>
+            </main>
+            <%- include("../partials/footer.ejs") %>
+    </body>
+
+    </html>
