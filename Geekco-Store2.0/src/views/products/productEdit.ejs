@@ -3,27 +3,49 @@
     <body class="home__body">
         <%- include("../partials/header.ejs") %>
             <main>
-                <form method="post" acti>
+
+                
+                <form method="post" action="/productos/dashboard/<%=id%>/edit?_method=PUT">
                     <div>
                         <label for="nombre" id="nombre"> Ingrese el nombre del producto</label>
-                        <input type="text" name="nombre">
+                        <input type="text" name="nombre" value="<%=productos.name%>">
+                    </div>
+                    <div>
+                        <label for="precio">Modificar Precio</label>
+                        <input type="text" name="precio" id="precio" value="<%=productos.precio%>">
+                    </div>
+                    <div>
+                        <label for="stock">esta en stock?</label>
+                        <input type="text" name="stock" id="stock" value="<%=productos.stock%>">
+                    </div>
+                    <div>
+                        <label for="descuento">Agregue descuento</label>
+                        <input type="text" name="descuento" id="descuento" value="<%=productos.descuento%>">
+                    </div>
+                    <div>
+                        <label for="plataforma">Modificar plataforma</label>
+                        <input type="text" name="plataforma" id="plataforma" value="<%=productos.plataforma%>">
+                    </div>
+                    <div>
+                        <label for="categoria">Modificar categoria</label>
+                        <input type="text" name="categoria" id="categoria" value="<%=productos.categoria%>">
                     </div>
                     <div>
                         <label for="descripcion">Agregue una breve descripcion</label>
-                        <input type="text" name="descripcion" id="descripcion">
+                        <input type="text" name="descripcion" id="descripcion" value="<%=productos.description%>">
                     </div>
                     <div>
                         <label for="imagen">selecciona una imagen para el producto</label>
-                        <input type="file" name="imagen" id="imagen">
+                        <input type="file" name="imagen" id="imagen" value="<%=productos.image%>">
                     </div>
-                    <div>
+               <!--      <div>
                         <label for="categoria">selecione</label>
                         <select name="categoria" id="categoria">
                             <option value="img-nuevo.png">novedad</option>
                             <option value="img-descuento.png">descuento</option>
                             <option value="img-gratis.png">gratuito</option>
                         </select>
-                    </div>
+                    </div> -->
                     <div>
                         <button type="reset">Borrar</button>
                         <button type="submit">Crear</button>

@@ -1,6 +1,6 @@
 const fs = require("fs");
 const path = require("path");
-const json = fs.readFileSync(
+let json = fs.readFileSync(
   path.join(__dirname, "../database/products.json"),
   "utf-8"
 );
@@ -23,9 +23,18 @@ const productsController = {
   
   },
   edit: (req, res) => {
+    const id= +req.params.id
+    let productos=products.find((elemento)=>{
+     
+        return elemento.id==id
+    
+    })
+  console.log(productos)
 
-    res.render("products/productEdit",{products})
-    const id = req.params.id;
+res.render("products/productEdit",{productos,id})
+
+
+    /*     const id = req.params.id;
     const producto = req.body
     for (let i = 0; i < products.length; i++) {
       if (products[i].id == id) {
@@ -35,8 +44,40 @@ const productsController = {
     }
     const updatedJson = JSON.stringify(products);
     fs.writeFileSync(path.join(__dirname, "../database/products.json"), updatedJson, "utf-8");
-     res.redirect("/");
+    */ /* res.redirect("/");  */
   },
+  update: (req,res)=>{
+    const { nombre, precio, stock, descuento, plataforma, categoria, descripcion, imagen}=req.body
+    const id= req.params.id
+    let nuevobjeto={
+     id,
+     nombre,
+     precio,
+     stock,
+     descuento,
+     plataforma,
+     categoria,
+     descripcion,
+     imagen
+    }
+    let producto=products.map((elemento)=>{
+      if(elemento.id==id){
+        nuevobjeto.imagen=elemento.image
+       
+        return nuevobjeto
+      }
+     
+    return elemento
+    }) 
+    console.log(producto)
+/*  console.log(producto) */
+/* console.log(producto) */
+    let json2=JSON.stringify(producto)
+/*     console.log(json2) */
+  /*  fs.writeFileSync(json,json2,"utf-8")  */
+   console.log(req.body)
+    res.send("editado")
+  }
 };
 
 module.exports = productsController;
