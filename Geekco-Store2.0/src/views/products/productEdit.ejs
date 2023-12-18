@@ -5,7 +5,7 @@
             <main>
 
                 
-                <form method="post" action="/productos/dashboard/<%=id%>/edit?_method=PUT">
+                <form action="/productos/dashboard/<%=id%>/edit?_method=PUT" method="post">
                     <div>
                         <label for="nombre" id="nombre"> Ingrese el nombre del producto</label>
                         <input type="text" name="nombre" value="<%=productos.name%>">

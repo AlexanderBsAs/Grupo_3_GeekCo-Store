@@ -1,9 +1,6 @@
 const fs = require("fs");
 const path = require("path");
-let json = fs.readFileSync(
-  path.join(__dirname, "../database/products.json"),
-  "utf-8"
-);
+let json = fs.readFileSync(path.join(__dirname, "../database/products.json"), "utf-8");
 const products = JSON.parse(json);
 
 const productsController = {
@@ -19,19 +16,19 @@ const productsController = {
     res.render("products/dashboard", { title: "dashboard", products });
   },
   formUpdate: (req, res) => {
-    res.render("products/formUpdate") 
-  
+    res.render("products/formUpdate")
+
   },
   edit: (req, res) => {
-    const id= +req.params.id
-    let productos=products.find((elemento)=>{
-     
-        return elemento.id==id
-    
-    })
-  console.log(productos)
+    const id = +req.params.id
+    let productos = products.find((elemento) => {
 
-res.render("products/productEdit",{productos,id})
+      return elemento.id == id
+
+    })
+    console.log(productos)
+
+    res.render("products/productEdit", { productos, id })
 
 
     /*     const id = req.params.id;
@@ -46,37 +43,41 @@ res.render("products/productEdit",{productos,id})
     fs.writeFileSync(path.join(__dirname, "../database/products.json"), updatedJson, "utf-8");
     */ /* res.redirect("/");  */
   },
-  update: (req,res)=>{
-    const { nombre, precio, stock, descuento, plataforma, categoria, descripcion, imagen}=req.body
-    const id= req.params.id
-    let nuevobjeto={
-     id,
-     nombre,
-     precio,
-     stock,
-     descuento,
-     plataforma,
-     categoria,
-     descripcion,
-     imagen
+  update: (req, res) => {
+    let { nombre, precio, stock, descuento, plataforma, categoria, descripcion, imagen } = req.body
+    let id = +req.params.id
+    let nuevobjeto = {
+      id: parseInt(id),
+      nombre,
+      precio: parseFloat(precio),
+      stock:parseInt(stock),
+      descuento,
+      plataforma,
+      categoria,
+      descripcion,
+      imagen
     }
-    let producto=products.map((elemento)=>{
-      if(elemento.id==id){
-        nuevobjeto.imagen=elemento.image
-       
+    let producto = products.map((elemento) => {
+      if (elemento.id == id) {
+        nuevobjeto.imagen = elemento.image
+
         return nuevobjeto
       }
-     
-    return elemento
-    }) 
-    console.log(producto)
-/*  console.log(producto) */
-/* console.log(producto) */
-    let json2=JSON.stringify(producto)
-/*     console.log(json2) */
-  /*  fs.writeFileSync(json,json2,"utf-8")  */
-   console.log(req.body)
-    res.send("editado")
+
+      return elemento
+    })
+    /* console.log(producto) */
+    /*  console.log(producto) */
+    /* console.log(producto) */
+    let json2 = JSON.stringify(producto)
+    /*     console.log(json2) */
+
+    fs.writeFileSync(path.join(__dirname, "../database/products.json"), json2, "utf-8") 
+
+
+    /* console.log(req.body) */
+    /* res.send(producto) */
+    res.redirect("/productos/dashboard")
   }
 };
 
