@@ -47,18 +47,18 @@ res.render("products/productEdit",{productos,id})
     */ /* res.redirect("/");  */
   },
   update: (req,res)=>{
-    const { nombre, precio, stock, descuento, plataforma, categoria, descripcion, imagen}=req.body
-    const id= req.params.id
+    const { name, price, stock, discount, plataform, category, description, image}=req.body
+    const id= +req.params.id
     let nuevobjeto={
      id,
-     nombre,
-     precio,
-     stock,
-     descuento,
-     plataforma,
-     categoria,
-     descripcion,
-     imagen
+     name,
+     price: +price,
+     stock:+stock,
+     discount:+discount,
+     plataform,
+     category,
+     description,
+     image
     }
     let producto=products.map((elemento)=>{
       if(elemento.id==id){
@@ -74,9 +74,9 @@ res.render("products/productEdit",{productos,id})
 /* console.log(producto) */
     let json2=JSON.stringify(producto)
 /*     console.log(json2) */
-  /*  fs.writeFileSync(json,json2,"utf-8")  */
+ fs.writeFileSync(path.join(__dirname, "../database/products.json"),json2,"utf-8")  
    console.log(req.body)
-    res.send("editado")
+    res.redirect("/productos/dashboard")
   }
 };
 
