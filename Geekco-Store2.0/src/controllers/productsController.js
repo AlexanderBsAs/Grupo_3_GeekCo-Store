@@ -1,9 +1,6 @@
 const fs = require("fs");
 const path = require("path");
-let json = fs.readFileSync(
-  path.join(__dirname, "../database/products.json"),
-  "utf-8"
-);
+let json = fs.readFileSync(path.join(__dirname, "../database/products.json"), "utf-8");
 const products = JSON.parse(json);
 
 const productsController = {
@@ -19,19 +16,19 @@ const productsController = {
     res.render("products/dashboard", { title: "dashboard", products });
   },
   formUpdate: (req, res) => {
-    res.render("products/formUpdate") 
-  
+    res.render("products/formUpdate")
+
   },
   edit: (req, res) => {
-    const id= +req.params.id
-    let productos=products.find((elemento)=>{
-     
-        return elemento.id==id
-    
-    })
-  console.log(productos)
+    const id = +req.params.id
+    let productos = products.find((elemento) => {
 
-res.render("products/productEdit",{productos,id})
+      return elemento.id == id
+
+    })
+    console.log(productos)
+
+    res.render("products/productEdit", { productos, id })
 
 
     /*     const id = req.params.id;
@@ -60,10 +57,10 @@ res.render("products/productEdit",{productos,id})
      description,
      image
     }
-    let producto=products.map((elemento)=>{
-      if(elemento.id==id){
-        nuevobjeto.imagen=elemento.image
-       
+    let producto = products.map((elemento) => {
+      if (elemento.id == id) {
+        nuevobjeto.imagen = elemento.image
+
         return nuevobjeto
       }
      
