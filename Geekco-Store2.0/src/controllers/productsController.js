@@ -62,14 +62,14 @@ update: (req,res)=>{
     "utf-8"
   );
 
-  try { 
+ /*  try {  */
     const { name, price, stock, discount, platform, category, description, installments}=req.body
   const id= +req.params.id
 
 const file=req.file
- if(!file){
+/*  if(!file){
   throw new Error("Debe elegir una imagen")
- }
+ } */
 
 /*  console.log(file) */
   let nuevobjeto={
@@ -88,7 +88,9 @@ const file=req.file
   let producto = products.map((elemento) => {
     if (elemento.id == id) {
       /* nuevobjeto.image = elemento.image */
-
+    if(nuevobjeto.image==null){
+      nuevobjeto.image=elemento.image
+    }
       return nuevobjeto
     }
    
@@ -103,9 +105,9 @@ fs.writeFileSync(path.join(__dirname, "../database/products.json"),json2,"utf-8"
  /* console.log(req.body) */
   res.redirect("/productos/dashboard")
 
-}catch(error){
+/* }catch(error){
   res.send("Error, debes elegir una imagen")
-}
+} */
 
 }
 //     update: (req, res) => {
